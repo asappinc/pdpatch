@@ -96,6 +96,7 @@ def dummydf(): return pd.DataFrame({'col_1': range(100, 105), 'col_2': ['a','b',
 # Cell
 @patch
 def title(self:pd.DataFrame, title):
+    '''Displays DataFrame with a title.'''
     out = widgets.Output()
     with out: display(self)
     layout = widgets.Layout(align_items='center')
@@ -150,5 +151,11 @@ class Less:
 def less(self:pd.DataFrame, page_size=5, page=1): return Less(self, page_size=page_size, page=page).out
 
 # Cell
+add_docs(pd.DataFrame, less='Displays one page of the DataFrame and buttons to move forward and backward.')
+
+# Cell
 @patch
 def less(self:pd.Series, page_size=5): return Less(self, page_size=page_size).out
+
+# Cell
+add_docs(pd.Series, less='Displays one page of the Series and buttons to move forward and backward.')
