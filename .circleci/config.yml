@@ -1,0 +1,77 @@
+version: 2
+
+macrosGeneric:
+  - &dockerhubCredentials
+    username: $DOCKERHUB_USER
+    password: $DOCKERHUB_PASSWORD
+
+jobs:
+  test:
+      docker:
+        - image: asappinc/python-38-ci
+          auth: *dockerhubCredentials
+      steps:
+        - checkout
+        - run: tox -e py38
+        - run: python setup.py sdist bdist_wheel
+        - store_test_results:
+            path: test-results
+        - store_artifacts:
+            path: test-results
+        - persist_to_workspace:
+            root: .
+            paths:
+              - test-results
+  test37:
+    docker:
+      - image: asappinc/python-37-ci
+        auth: *dockerhubCredentials
+    steps:
+      - checkout
+      - run: tox -e py37
+  test39:
+    docker:
+      - image: asappinc/python-39-ci
+        auth: *dockerhubCredentials
+    steps:
+      - checkout
+      - run: tox -e py39
+
+  publish:
+      docker:
+        - image: asappinc/python-38-ci
+          auth: *dockerhubCredentials
+      steps:
+        - checkout
+        - run: python3.8 setup.py sdist bdist_wheel
+        - run: twine upload --repository-url $PYPI_URL dist/*
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - test:
+          context: asapp-build-standard
+          filters:
+            tags:
+              only:
+                - /.*/
+      - test37:
+          context: asapp-build-standard
+          filters:
+            tags:
+              only:
+                - /.*/
+      - test39:
+          context: asapp-build-standard
+          filters:
+            tags:
+              only:
+                - /.*/
+      - publish:
+          context: asapp-build-standard
+          requires:
+            - test
+          filters:
+            branches:
+              only: master
