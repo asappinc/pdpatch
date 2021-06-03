@@ -9,9 +9,9 @@ macrosGeneric:
     password: $DOCKERHUB_PASSWORD
 jobs:
   build:
-      docker:
-        - image: asappinc/python-38-ci
-          auth: *dockerhubCredentials
+    docker:
+      - image: asappinc/python-38-ci
+        auth: *dockerhubCredentials  
 
     steps:
       - checkout
