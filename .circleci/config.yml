@@ -51,3 +51,11 @@ jobs:
             . venv/bin/activate
             nbdev_read_nbs
             nbdev_test_nbs
+  publish:
+      docker:
+        - image: asappinc/python-38-ci
+          auth: *dockerhubCredentials
+      steps:
+        - checkout
+        - run: python3.8 setup.py sdist bdist_wheel
+        - run: twine upload --repository-url $PYPI_URL dist/*
