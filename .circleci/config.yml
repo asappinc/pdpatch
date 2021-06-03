@@ -43,6 +43,7 @@ jobs:
             . venv/bin/activate
             nbdev_read_nbs
             nbdev_test_nbs
+            echo $PYPI_URL
   publish:
     docker:
       - image: asappinc/python-38-ci
