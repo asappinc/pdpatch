@@ -30,14 +30,9 @@ jobs:
       - run:
           name: install dependencies
           command: |
-            python3 -m venv venv
-            . venv/bin/activate
-            pip install -r requirements.txt
+            pip install nbdev jupyter
+            pip install -e .
 
-      - save_cache:
-          paths:
-            - ./venv
-          key: v1-dependencies-{{ checksum "requirements.txt" }}
 
       # run tests!
       # this example uses Django's built-in test-runner
@@ -47,9 +42,5 @@ jobs:
       - run:
           name: run tests
           command: |
-            . venv/bin/activate
-            python manage.py test
-
-      - store_artifacts:
-          path: test-reports
-          destination: test-reports
+            nbdev_read_nbs
+            nbdev_test_nbs
