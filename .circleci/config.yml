@@ -3,6 +3,10 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 #
 version: 2
+macrosGeneric:
+  - &dockerhubCredentials
+    username: $DOCKERHUB_USER
+    password: $DOCKERHUB_PASSWORD
 jobs:
   build:
     docker:
