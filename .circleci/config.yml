@@ -43,9 +43,7 @@ jobs:
             . venv/bin/activate
             nbdev_read_nbs
             nbdev_test_nbs
-            echo $PYPI_URL
             python3.8 setup.py sdist bdist_wheel
-            echo $PYPI_URL
 
   publish:
     docker:
@@ -64,4 +62,15 @@ workflows:
           filters:
             tags:
               only:
+                - /.*/
+      - publish:
+          context: asapp-build-standard
+          requires:
+            - test
+          filters:
+            tags:
+              only:
+                - /.*/
+            branches:
+              ignore:
                 - /.*/
