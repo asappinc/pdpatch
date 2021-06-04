@@ -8,7 +8,7 @@ macrosGeneric:
     username: $DOCKERHUB_USER
     password: $DOCKERHUB_PASSWORD
 jobs:
-  build:
+  test:
     docker:
       - image: asappinc/python-38-ci
         auth: *dockerhubCredentials  
