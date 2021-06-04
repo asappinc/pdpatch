@@ -72,5 +72,4 @@ workflows:
               only:
                 - /.*/
             branches:
-              ignore:
-                - /.*/
+              only: master
