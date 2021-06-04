@@ -43,7 +43,6 @@ jobs:
             . venv/bin/activate
             nbdev_read_nbs
             nbdev_test_nbs
-            python3.8 setup.py sdist bdist_wheel
 
   publish:
     docker:
@@ -68,8 +67,5 @@ workflows:
           requires:
             - test
           filters:
-            tags:
-              only:
-                - /.*/
             branches:
               only: master
