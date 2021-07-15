@@ -159,3 +159,19 @@ def less(self:pd.Series, page_size=5): return Less(self, page_size=page_size).ou
 
 # Cell
 add_docs(pd.Series, less='Displays one page of the Series and buttons to move forward and backward.')
+
+# Cell
+@patch
+def c2back(self:pd.DataFrame, cols2back):
+    '''Move columns to back'''
+    if not is_listy(cols2back): cols2back = [cols2back]
+    cols = [c for c in self.columns if c not in cols2back]+cols2back
+    return self[cols]
+
+# Cell
+@patch
+def c2front(self:pd.DataFrame, cols2front):
+    '''Move columns to front'''
+    if not is_listy(cols2front): cols2front = [cols2front]
+    cols = cols2front + [c for c in self.columns if c not in cols2front]
+    return self[cols]
