@@ -3,7 +3,6 @@
 __all__ = ['l', 'minmax', 'dummydf', 'Walker', 'Less']
 
 # Cell
-import warnings
 from functools import partial
 
 from fastcore.all import *
@@ -16,7 +15,9 @@ from IPython.display import display
 def repetitions(self:pd.DataFrame, col): return self.groupby(col).size()
 
 # Cell
-add_docs(pd.DataFrame, repetitions='Counts the number of repetitions for each element.')
+add_docs(pd.DataFrame,
+         repetitions='Counts the number of repetitions for each element.',
+         ffill=pd.DataFrame.ffill.__doc__)
 
 # Cell
 @patch
