@@ -1,4 +1,3 @@
-
 # pdpatch
 > New methods for pandas DataFrame and Series.
 
