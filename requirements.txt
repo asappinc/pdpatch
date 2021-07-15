@@ -1,4 +1,4 @@
 pandas
-fastcore
+fastcore>=1.3.20
 ipywidgets
 IPython
