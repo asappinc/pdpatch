@@ -174,3 +174,8 @@ def c2front(self:pd.DataFrame, cols2front):
     if not is_listy(cols2front): cols2front = [cols2front]
     cols = cols2front + [c for c in self.columns if c not in cols2front]
     return self[cols]
+
+# Cell
+add_docs(pd.DataFrame,
+         c2back="Move columns to back",
+         c2front="Move columns to front")
