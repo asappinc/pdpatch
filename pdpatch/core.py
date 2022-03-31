@@ -123,13 +123,15 @@ def title(self:pd.DataFrame, title):
 # Cell
 class Walker:
     def __init__(self, val=0, min_val=None, max_val=None): store_attr()
-    def _next(self, *args, **kwargs):
-        self.val += 1
+    def _next(self, *args, val=1, **kwargs):
+        self.val += val
         if self.max_val: self.val = min(self.max_val, self.val)
-    def _prev(self, *args, **kwargs):
-        self.val -= 1
+    def _prev(self, *args, val=1, **kwargs):
+        self.val -= val
         if self.min_val: self.val = max(self.min_val, self.val)
-
+    def _head(self):
+        self.val = 0
+        if self.min_val: self.val = max(self.min_val, self.val)
 
 # Cell
 class Less:
@@ -154,7 +156,7 @@ class Less:
         layout = widgets.Layout(width='100%', display='flex', align_items='center')
         self.out_label = widgets.Output(wait=True)
         with self.out_label: display(widgets.Label(f"page {self.page.val} of {self.n_pages}"))
-        self.box = widgets.VBox([self.out_df, widgets.HBox([self.prev, self.next, self.out_label])])
+        self.box = widgets.VBox([widgets.HBox([self.prev, self.next, self.out_label]), self.out_df])
         with self.out:
             display(self.box)
 
