@@ -17,7 +17,12 @@ def repetitions(self:pd.DataFrame, col): return self.groupby(col).size()
 # Cell
 add_docs(pd.DataFrame,
          repetitions='Counts the number of repetitions for each element.',
-         ffill=pd.DataFrame.ffill.__doc__)
+         ffill=pd.core.generic.NDFrame.ffill.__doc__,
+         bfill=pd.core.generic.NDFrame.bfill.__doc__,
+         clip=pd.core.generic.NDFrame.clip.__doc__,
+         interpolate=pd.core.generic.NDFrame.interpolate.__doc__,
+         where=pd.core.generic.NDFrame.where.__doc__,
+         mask=pd.core.generic.NDFrame.mask.__doc__)
 
 # Cell
 @patch
@@ -49,6 +54,10 @@ def len(self:pd.DataFrame): return len(self)
 add_docs(pd.DataFrame, len=len.__doc__)
 
 # Cell
+@patch
+def len(self:pd.Series): return len(self)
+
+# Cell
 @patch(as_prop=True)
 def l(self:pd.Index): return L(self, use_list=True)
 
@@ -68,7 +77,15 @@ add_docs(pd.DataFrame, page='Shows rows from page*page_size to (page+1)*page_siz
 def page(self:pd.Series, page, page_size=5): return self.head(page*page_size).tail(page_size)
 
 # Cell
-add_docs(pd.Series, page='Shows rows from page*page_size to (page+1)*page_size')
+add_docs(pd.Series,
+         page='Shows rows from page*page_size to (page+1)*page_size',
+         ffill=pd.core.generic.NDFrame.ffill.__doc__,
+         bfill=pd.core.generic.NDFrame.bfill.__doc__,
+         clip=pd.core.generic.NDFrame.clip.__doc__,
+         interpolate=pd.core.generic.NDFrame.interpolate.__doc__,
+         where=pd.core.generic.NDFrame.where.__doc__,
+         mask=pd.core.generic.NDFrame.mask.__doc__,
+         len=len.__doc__)
 
 # Cell
 @patch
@@ -152,14 +169,25 @@ class Less:
 def less(self:pd.DataFrame, page_size=5, page=1): return Less(self, page_size=page_size, page=page).out
 
 # Cell
-add_docs(pd.DataFrame, less='Displays one page of the DataFrame and buttons to move forward and backward.')
+@patch
+def to_percent(self:pd.DataFrame, exclude=[]):
+    cols = self.dtypes[self.dtypes=='float'].index
+    cols = [c for c in cols if c not in exclude]
+    return self.style.format({c: '{:.1%}'.format for c in cols})
+
+# Cell
+add_docs(pd.DataFrame,
+         less='Displays one page of the DataFrame and buttons to move forward and backward.',
+         to_percent='Formats float columns to percentage.')
 
 # Cell
 @patch
 def less(self:pd.Series, page_size=5): return Less(self, page_size=page_size).out
 
 # Cell
-add_docs(pd.Series, less='Displays one page of the Series and buttons to move forward and backward.')
+add_docs(pd.Series,
+         less='Displays one page of the Series and buttons to move forward and backward.',
+         )
 
 # Cell
 @patch
