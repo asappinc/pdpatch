@@ -27,8 +27,8 @@ index = {"pd.DataFrame.repetitions": "00_core.ipynb",
 
 modules = ["core.py"]
 
-doc_url = "https://pages.github.ASAPP.dev./ababino/pdpatch/"
+doc_url = "https://ababino.github.io/pdpatch/"
 
-git_url = "https://github.ASAPP.dev/ababino/pdpatch/tree/main/"
+git_url = "https://github.com/ababino/pdpatch/tree/main/"
 
 def custom_doc_links(name): return None
