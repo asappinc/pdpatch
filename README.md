@@ -4,10 +4,7 @@
 
 ## Install
 
-`git clone`
-`cd pdpatch`
-`pip install -e .`
-
+`pip install pdpatch`
 
 ## How to use
 
@@ -79,6 +76,12 @@ df
 </div>
 
 
+
+## Interactive Method `.less()`
+
+```python
+df.less(2)
+```
 
 ### Shorter methods
 
@@ -177,3 +180,7 @@ df.col_1.minmax
     (100, 104)
 
 
+
+```python
+df.less(2)
+```

@@ -4,6 +4,7 @@ __all__ = ['l', 'minmax', 'dummydf', 'Walker', 'Less']
 
 # Cell
 from functools import partial
+import math
 
 from fastcore.all import *
 import pandas as pd
@@ -135,8 +136,10 @@ class Walker:
 
 # Cell
 class Less:
-    def __init__(self, df, page_size=5, page=1):
+    def __init__(self, df, page_size=5, page=1, where=None):
         store_attr()
+        if not where is None:
+            page = math.floor(L(range_of(df))[where][0]/page_size+1)
 
         self.out = widgets.Output(wait=True)
         self.out_df = widgets.Output(wait=True)
@@ -168,7 +171,8 @@ class Less:
 
 # Cell
 @patch
-def less(self:pd.DataFrame, page_size=5, page=1): return Less(self, page_size=page_size, page=page).out
+def less(self:pd.DataFrame, page_size=5, page=1, where=None):
+    return Less(self, page_size=page_size, page=page, where=where).out
 
 # Cell
 @patch
