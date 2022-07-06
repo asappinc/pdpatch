@@ -23,7 +23,8 @@ index = {"pd.DataFrame.repetitions": "00_core.ipynb",
          "pd.DataFrame.to_percent": "00_core.ipynb",
          "pd.Series.less": "00_core.ipynb",
          "pd.DataFrame.c2back": "00_core.ipynb",
-         "pd.DataFrame.c2front": "00_core.ipynb"}
+         "pd.DataFrame.c2front": "00_core.ipynb",
+         "pd.DataFrame.reorderc": "00_core.ipynb"}
 
 modules = ["core.py"]
 

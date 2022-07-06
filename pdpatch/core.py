@@ -4,6 +4,7 @@ __all__ = ['l', 'minmax', 'dummydf', 'Walker', 'Less']
 
 # Cell
 from functools import partial
+from itertools import chain
 import math
 
 from fastcore.all import *
@@ -90,7 +91,11 @@ add_docs(pd.Series,
 
 # Cell
 @patch
-def renamec(self:pd.DataFrame, d): return self.rename(columns=d)
+def renamec(self:pd.DataFrame, d, *args):
+    if args:
+        if isinstance(d, dict): d = chain(*d.items())
+        d = dict(chunked(listify(d) + listify(args), 2))
+    return self.rename(columns=d)
 
 # Cell
 add_docs(pd.DataFrame, renamec='Renames column names.')
@@ -213,3 +218,8 @@ def c2front(self:pd.DataFrame, cols2front):
 add_docs(pd.DataFrame,
          c2back="Move columns to back",
          c2front="Move columns to front")
+
+# Cell
+@patch
+def reorderc(sefl:pd.DataFrame, to_front=[], to_back=[]):
+    return df.c2front(to_front).c2back(to_back)

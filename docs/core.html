@@ -63,28 +63,6 @@ nb_path: "00_core.ipynb"
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#          ffill=pd.core.generic.NDFrame.ffill.__doc__,</span>
-<span class="c1">#          bfill=pd.core.generic.NDFrame.bfill.__doc__,</span>
-<span class="c1">#          clip=pd.core.generic.NDFrame.clip.__doc__,</span>
-<span class="c1">#          interpolate=pd.core.generic.NDFrame.interpolate.__doc__,</span>
-<span class="c1">#          where=pd.core.generic.NDFrame.where.__doc__,</span>
-<span class="c1">#          mask=pd.core.generic.NDFrame.mask.__doc__)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">nodoc</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="nb">vars</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">callable</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">n</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">c</span><span class="o">.</span><span class="vm">__doc__</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">]</span>
 </pre></div>
 
@@ -106,7 +84,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.repetitions" class="doc_header"><code>DataFrame.repetitions</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L15" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetitions</code>(<strong><code>col</code></strong>)</p>
+<h4 id="DataFrame.repetitions" class="doc_header"><code>DataFrame.repetitions</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetitions</code>(<strong><code>col</code></strong>)</p>
 </blockquote>
 <p>Counts the number of repetitions for each element.</p>
 
@@ -201,7 +179,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.repetition_counts" class="doc_header"><code>DataFrame.repetition_counts</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L29" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetition_counts</code>(<strong><code>col</code></strong>)</p>
+<h4 id="DataFrame.repetition_counts" class="doc_header"><code>DataFrame.repetition_counts</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetition_counts</code>(<strong><code>col</code></strong>)</p>
 </blockquote>
 <p>Counts the number of groups with the same number of repetitions.</p>
 
@@ -300,7 +278,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.single_events" class="doc_header"><code>DataFrame.single_events</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L36" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.single_events</code>(<strong><code>col</code></strong>)</p>
+<h4 id="DataFrame.single_events" class="doc_header"><code>DataFrame.single_events</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.single_events</code>(<strong><code>col</code></strong>)</p>
 </blockquote>
 <p>Returns rows that appear only once.</p>
 
@@ -425,7 +403,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.crosstab" class="doc_header"><code>DataFrame.crosstab</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L43" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.crosstab</code>(<strong><code>index</code></strong>, <strong><code>column</code></strong>, <strong><code>values</code></strong>=<em><code>None</code></em>, <strong><code>rownames</code></strong>=<em><code>None</code></em>, <strong><code>colnames</code></strong>=<em><code>None</code></em>, <strong><code>aggfunc</code></strong>=<em><code>None</code></em>, <strong><code>margins</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>margins_name</code></strong>:<code>str</code>=<em><code>'All'</code></em>, <strong><code>dropna</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>normalize</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="DataFrame.crosstab" class="doc_header"><code>DataFrame.crosstab</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.crosstab</code>(<strong><code>index</code></strong>, <strong><code>column</code></strong>, <strong><code>values</code></strong>=<em><code>None</code></em>, <strong><code>rownames</code></strong>=<em><code>None</code></em>, <strong><code>colnames</code></strong>=<em><code>None</code></em>, <strong><code>aggfunc</code></strong>=<em><code>None</code></em>, <strong><code>margins</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>margins_name</code></strong>:<code>str</code>=<em><code>'All'</code></em>, <strong><code>dropna</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>normalize</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Compute a simple cross tabulation of two (or more) factors. By default
 computes a frequency table of the factors unless an array of values and an
@@ -542,7 +520,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.len" class="doc_header"><code>DataFrame.len</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L51" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.len</code>()</p>
+<h4 id="DataFrame.len" class="doc_header"><code>DataFrame.len</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.len</code>()</p>
 </blockquote>
 <p>Return the number of items in a container.</p>
 
@@ -581,7 +559,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.len" class="doc_header"><code>Series.len</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L58" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.len</code>()</p>
+<h4 id="Series.len" class="doc_header"><code>Series.len</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L59" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.len</code>()</p>
 </blockquote>
 <p>Return the number of items in a container.</p>
 
@@ -679,7 +657,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.page" class="doc_header"><code>DataFrame.page</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L70" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="DataFrame.page" class="doc_header"><code>DataFrame.page</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Shows rows from page<em>page_size to (page+1)</em>page_size</p>
 
@@ -799,7 +777,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.page" class="doc_header"><code>Series.page</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L77" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="Series.page" class="doc_header"><code>Series.page</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Shows rows from page<em>page_size to (page+1)</em>page_size</p>
 
@@ -890,7 +868,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.renamec" class="doc_header"><code>DataFrame.renamec</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L92" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.renamec</code>(<strong><code>d</code></strong>)</p>
+<h4 id="DataFrame.renamec" class="doc_header"><code>DataFrame.renamec</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.renamec</code>(<strong><code>d</code></strong>, <strong>*<code>args</code></strong>)</p>
 </blockquote>
 <p>Renames column names.</p>
 
@@ -914,6 +892,87 @@ dtype: int64</pre>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">dummydf</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">renamec</span><span class="p">({</span><span class="s1">&#39;col_1&#39;</span><span class="p">:</span> <span class="s1">&#39;col_a&#39;</span><span class="p">},</span> <span class="s1">&#39;col_2&#39;</span><span class="p">,</span> <span class="s1">&#39;bar&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col_a</th>
+      <th>bar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>d</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>104</td>
+      <td>e</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
 
 </div>
     {% endraw %}
@@ -929,7 +988,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.notin" class="doc_header"><code>Series.notin</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L99" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.notin</code>(<strong><code>values</code></strong>)</p>
+<h4 id="Series.notin" class="doc_header"><code>Series.notin</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.notin</code>(<strong><code>values</code></strong>)</p>
 </blockquote>
 <p>Whether elements in Series are not contained in <code>values</code>.</p>
 
@@ -968,7 +1027,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.mapk" class="doc_header"><code>Series.mapk</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L106" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.mapk</code>(<strong><code>fun</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="Series.mapk" class="doc_header"><code>Series.mapk</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.mapk</code>(<strong><code>fun</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Like map but passes kwargs to function.</p>
 
@@ -1013,7 +1072,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="dummydf" class="doc_header"><code>dummydf</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L113" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dummydf</code>()</p>
+<h4 id="dummydf" class="doc_header"><code>dummydf</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dummydf</code>()</p>
 </blockquote>
 
 </div>
@@ -1050,7 +1109,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.title" class="doc_header"><code>DataFrame.title</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L116" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.title</code>(<strong><code>title</code></strong>)</p>
+<h4 id="DataFrame.title" class="doc_header"><code>DataFrame.title</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L121" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.title</code>(<strong><code>title</code></strong>)</p>
 </blockquote>
 <p>Displays DataFrame with a title.</p>
 
@@ -1100,7 +1159,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Walker" class="doc_header"><code>class</code> <code>Walker</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L125" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Walker</code>(<strong><code>val</code></strong>=<em><code>0</code></em>, <strong><code>min_val</code></strong>=<em><code>None</code></em>, <strong><code>max_val</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Walker" class="doc_header"><code>class</code> <code>Walker</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L130" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Walker</code>(<strong><code>val</code></strong>=<em><code>0</code></em>, <strong><code>min_val</code></strong>=<em><code>None</code></em>, <strong><code>max_val</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1137,7 +1196,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="Less" class="doc_header"><code>class</code> <code>Less</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L138" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Less</code>(<strong><code>df</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>, <strong><code>page</code></strong>=<em><code>1</code></em>, <strong><code>where</code></strong>=<em><code>None</code></em>)</p>
+<h2 id="Less" class="doc_header"><code>class</code> <code>Less</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L143" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>Less</code>(<strong><code>df</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>, <strong><code>page</code></strong>=<em><code>1</code></em>, <strong><code>where</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 
 </div>
@@ -1168,7 +1227,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.less" class="doc_header"><code>DataFrame.less</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L173" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.less</code>(<strong><code>page_size</code></strong>=<em><code>5</code></em>, <strong><code>page</code></strong>=<em><code>1</code></em>, <strong><code>where</code></strong>=<em><code>None</code></em>)</p>
+<h4 id="DataFrame.less" class="doc_header"><code>DataFrame.less</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L178" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.less</code>(<strong><code>page_size</code></strong>=<em><code>5</code></em>, <strong><code>page</code></strong>=<em><code>1</code></em>, <strong><code>where</code></strong>=<em><code>None</code></em>)</p>
 </blockquote>
 <p>Displays one page of the DataFrame and buttons to move forward and backward.</p>
 
@@ -1200,7 +1259,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.to_percent" class="doc_header"><code>DataFrame.to_percent</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L178" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.to_percent</code>(<strong><code>exclude</code></strong>=<em><code>[]</code></em>)</p>
+<h4 id="DataFrame.to_percent" class="doc_header"><code>DataFrame.to_percent</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L183" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.to_percent</code>(<strong><code>exclude</code></strong>=<em><code>[]</code></em>)</p>
 </blockquote>
 <p>Formats float columns to percentage.</p>
 
@@ -1274,7 +1333,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.less" class="doc_header"><code>Series.less</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L190" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.less</code>(<strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="Series.less" class="doc_header"><code>Series.less</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L195" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.less</code>(<strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Displays one page of the Series and buttons to move forward and backward.</p>
 
@@ -1337,7 +1396,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.c2back" class="doc_header"><code>DataFrame.c2back</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L199" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.c2back</code>(<strong><code>cols2back</code></strong>)</p>
+<h4 id="DataFrame.c2back" class="doc_header"><code>DataFrame.c2back</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L204" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.c2back</code>(<strong><code>cols2back</code></strong>)</p>
 </blockquote>
 <p>Move columns to back</p>
 
@@ -1369,7 +1428,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.c2front" class="doc_header"><code>DataFrame.c2front</code><a href="https://github.ASAPP.dev/ababino/pdpatch/tree/main/pdpatch/core.py#L206" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.c2front</code>(<strong><code>cols2front</code></strong>)</p>
+<h4 id="DataFrame.c2front" class="doc_header"><code>DataFrame.c2front</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L211" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.c2front</code>(<strong><code>cols2front</code></strong>)</p>
 </blockquote>
 <p>Move columns to front</p>
 
@@ -1719,6 +1778,124 @@ dtype: int64</pre>
     </tr>
     <tr>
       <th>4</th>
+      <td>e</td>
+      <td>104</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="DataFrame.reorderc" class="doc_header"><code>DataFrame.reorderc</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L223" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.reorderc</code>(<strong><code>sefl</code></strong>:<code>DataFrame</code>, <strong><code>to_front</code></strong>=<em><code>[]</code></em>, <strong><code>to_back</code></strong>=<em><code>[]</code></em>)</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;col_3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;col_1&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">reorderc</span><span class="p">([</span><span class="s1">&#39;col_3&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;col_1&#39;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col_3</th>
+      <th>col_2</th>
+      <th>col_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>a</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>b</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>c</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>d</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>104</td>
       <td>e</td>
       <td>104</td>
     </tr>
