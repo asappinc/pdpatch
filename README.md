@@ -79,9 +79,7 @@ df
 
 ## Interactive Method `.less()`
 
-```python
-df.less(2)
-```
+![Alt Text](less15_360.gif)
 
 ### Shorter methods
 
@@ -171,7 +169,6 @@ df.len()
 
 ```python
 df.col_1.minmax
-
 ```
 
 
@@ -180,7 +177,3 @@ df.col_1.minmax
     (100, 104)
 
 
-
-```python
-df.less(2)
-```
