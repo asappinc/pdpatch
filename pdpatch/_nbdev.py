@@ -2,7 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"pd.DataFrame.repetitions": "00_core.ipynb",
+index = {"dummydf": "00_core.ipynb",
+         "pd.DataFrame.repetitions": "00_core.ipynb",
          "pd.DataFrame.repetition_counts": "00_core.ipynb",
          "pd.DataFrame.single_events": "00_core.ipynb",
          "pd.DataFrame.crosstab": "00_core.ipynb",
@@ -15,7 +16,6 @@ index = {"pd.DataFrame.repetitions": "00_core.ipynb",
          "pd.DataFrame.renamec": "00_core.ipynb",
          "pd.Series.notin": "00_core.ipynb",
          "pd.Series.mapk": "00_core.ipynb",
-         "dummydf": "00_core.ipynb",
          "pd.DataFrame.title": "00_core.ipynb",
          "Walker": "00_core.ipynb",
          "Less": "00_core.ipynb",

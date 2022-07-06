@@ -38,6 +38,43 @@ nb_path: "00_core.ipynb"
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Utils">Utils<a class="anchor-link" href="#Utils"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_markdown rendered_html output_subarea ">
+<h4 id="dummydf" class="doc_header"><code>dummydf</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dummydf</code>()</p>
+</blockquote>
+
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Transformations">Transformations<a class="anchor-link" href="#Transformations"> </a></h2>
 </div>
 </div>
@@ -84,7 +121,7 @@ nb_path: "00_core.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.repetitions" class="doc_header"><code>DataFrame.repetitions</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L16" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetitions</code>(<strong><code>col</code></strong>)</p>
+<h4 id="DataFrame.repetitions" class="doc_header"><code>DataFrame.repetitions</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L19" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetitions</code>(<strong><code>col</code></strong>)</p>
 </blockquote>
 <p>Counts the number of repetitions for each element.</p>
 
@@ -179,7 +216,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.repetition_counts" class="doc_header"><code>DataFrame.repetition_counts</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L30" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetition_counts</code>(<strong><code>col</code></strong>)</p>
+<h4 id="DataFrame.repetition_counts" class="doc_header"><code>DataFrame.repetition_counts</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L33" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.repetition_counts</code>(<strong><code>col</code></strong>)</p>
 </blockquote>
 <p>Counts the number of groups with the same number of repetitions.</p>
 
@@ -278,7 +315,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.single_events" class="doc_header"><code>DataFrame.single_events</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L37" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.single_events</code>(<strong><code>col</code></strong>)</p>
+<h4 id="DataFrame.single_events" class="doc_header"><code>DataFrame.single_events</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L40" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.single_events</code>(<strong><code>col</code></strong>)</p>
 </blockquote>
 <p>Returns rows that appear only once.</p>
 
@@ -403,7 +440,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.crosstab" class="doc_header"><code>DataFrame.crosstab</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L44" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.crosstab</code>(<strong><code>index</code></strong>, <strong><code>column</code></strong>, <strong><code>values</code></strong>=<em><code>None</code></em>, <strong><code>rownames</code></strong>=<em><code>None</code></em>, <strong><code>colnames</code></strong>=<em><code>None</code></em>, <strong><code>aggfunc</code></strong>=<em><code>None</code></em>, <strong><code>margins</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>margins_name</code></strong>:<code>str</code>=<em><code>'All'</code></em>, <strong><code>dropna</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>normalize</code></strong>=<em><code>False</code></em>)</p>
+<h4 id="DataFrame.crosstab" class="doc_header"><code>DataFrame.crosstab</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L47" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.crosstab</code>(<strong><code>index</code></strong>, <strong><code>column</code></strong>, <strong><code>values</code></strong>=<em><code>None</code></em>, <strong><code>rownames</code></strong>=<em><code>None</code></em>, <strong><code>colnames</code></strong>=<em><code>None</code></em>, <strong><code>aggfunc</code></strong>=<em><code>None</code></em>, <strong><code>margins</code></strong>:<code>bool</code>=<em><code>False</code></em>, <strong><code>margins_name</code></strong>:<code>str</code>=<em><code>'All'</code></em>, <strong><code>dropna</code></strong>:<code>bool</code>=<em><code>True</code></em>, <strong><code>normalize</code></strong>=<em><code>False</code></em>)</p>
 </blockquote>
 <p>Compute a simple cross tabulation of two (or more) factors. By default
 computes a frequency table of the factors unless an array of values and an
@@ -520,7 +557,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.len" class="doc_header"><code>DataFrame.len</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L52" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.len</code>()</p>
+<h4 id="DataFrame.len" class="doc_header"><code>DataFrame.len</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L55" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.len</code>()</p>
 </blockquote>
 <p>Return the number of items in a container.</p>
 
@@ -559,7 +596,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.len" class="doc_header"><code>Series.len</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L59" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.len</code>()</p>
+<h4 id="Series.len" class="doc_header"><code>Series.len</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L62" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.len</code>()</p>
 </blockquote>
 <p>Return the number of items in a container.</p>
 
@@ -657,7 +694,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.page" class="doc_header"><code>DataFrame.page</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L71" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="DataFrame.page" class="doc_header"><code>DataFrame.page</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L74" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Shows rows from page<em>page_size to (page+1)</em>page_size</p>
 
@@ -777,7 +814,7 @@ c      0  0  0</p>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.page" class="doc_header"><code>Series.page</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L78" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
+<h4 id="Series.page" class="doc_header"><code>Series.page</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L81" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.page</code>(<strong><code>page</code></strong>, <strong><code>page_size</code></strong>=<em><code>5</code></em>)</p>
 </blockquote>
 <p>Shows rows from page<em>page_size to (page+1)</em>page_size</p>
 
@@ -868,7 +905,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.renamec" class="doc_header"><code>DataFrame.renamec</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L93" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.renamec</code>(<strong><code>d</code></strong>, <strong>*<code>args</code></strong>)</p>
+<h4 id="DataFrame.renamec" class="doc_header"><code>DataFrame.renamec</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L96" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.renamec</code>(<strong><code>d</code></strong>, <strong>*<code>args</code></strong>)</p>
 </blockquote>
 <p>Renames column names.</p>
 
@@ -988,7 +1025,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.notin" class="doc_header"><code>Series.notin</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L104" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.notin</code>(<strong><code>values</code></strong>)</p>
+<h4 id="Series.notin" class="doc_header"><code>Series.notin</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L107" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.notin</code>(<strong><code>values</code></strong>)</p>
 </blockquote>
 <p>Whether elements in Series are not contained in <code>values</code>.</p>
 
@@ -1027,7 +1064,7 @@ dtype: int64</pre>
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="Series.mapk" class="doc_header"><code>Series.mapk</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L111" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.mapk</code>(<strong><code>fun</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
+<h4 id="Series.mapk" class="doc_header"><code>Series.mapk</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L114" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>Series.mapk</code>(<strong><code>fun</code></strong>, <strong>**<code>kwargs</code></strong>)</p>
 </blockquote>
 <p>Like map but passes kwargs to function.</p>
 
@@ -1044,43 +1081,6 @@ dtype: int64</pre>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-</div>
-    {% endraw %}
-
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Utils">Utils<a class="anchor-link" href="#Utils"> </a></h2>
-</div>
-</div>
-</div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-<div class="output_markdown rendered_html output_subarea ">
-<h4 id="dummydf" class="doc_header"><code>dummydf</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/core.py#L118" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>dummydf</code>()</p>
-</blockquote>
-
-</div>
-
-</div>
-
-</div>
-</div>
 
 </div>
     {% endraw %}
