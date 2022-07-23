@@ -193,7 +193,7 @@ add_docs(pd.DataFrame,
 
 # Cell
 @patch
-def less(self:pd.Series, page_size=5): return Less(self, page_size=page_size).out
+def less(self:pd.Series, page_size=5, where=None): return Less(self, page_size=page_size, where=where).out
 
 # Cell
 add_docs(pd.Series,

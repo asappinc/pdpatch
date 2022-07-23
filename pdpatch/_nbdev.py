@@ -24,9 +24,17 @@ index = {"dummydf": "00_core.ipynb",
          "pd.Series.less": "00_core.ipynb",
          "pd.DataFrame.c2back": "00_core.ipynb",
          "pd.DataFrame.c2front": "00_core.ipynb",
-         "pd.DataFrame.reorderc": "00_core.ipynb"}
+         "pd.DataFrame.reorderc": "00_core.ipynb",
+         "replace_parentheses": "01_case.ipynb",
+         "snake2words": "01_case.ipynb",
+         "replace_acronyms": "01_case.ipynb",
+         "acronyms": "01_case.ipynb",
+         "pd.DataFrame.rename2words": "01_case.ipynb",
+         "PxLabeler": "01_case.ipynb",
+         "px_labeler": "01_case.ipynb"}
 
-modules = ["core.py"]
+modules = ["core.py",
+           "case.py"]
 
 doc_url = "https://ababino.github.io/pdpatch/"
 

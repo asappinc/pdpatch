@@ -1,6 +1,7 @@
 {
   "pdpatch": {
     "Overview": "/",
-    "core": "core.html"
+    "core": "core.html",
+    "Case": "case.html"
   }
 }
