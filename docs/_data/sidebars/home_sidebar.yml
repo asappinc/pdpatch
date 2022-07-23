@@ -13,7 +13,7 @@ entries:
       title: core
       url: core.html
     - output: web,pdf
-      title: Case
+      title: case
       url: case.html
     output: web
     title: pdpatch
