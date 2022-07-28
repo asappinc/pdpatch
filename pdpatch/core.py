@@ -223,4 +223,4 @@ add_docs(pd.DataFrame,
 @patch
 def reorderc(sefl:pd.DataFrame, to_front=[], to_back=[]):
     '''Reorder DataFrame columns.'''
-    return df.c2front(to_front).c2back(to_back)
+    return self.c2front(to_front).c2back(to_back)
