@@ -9,8 +9,8 @@ from fastcore.all import *
 from .core import *
 
 # Cell
-def replace_parentheses(s:int):
-    '''Replaces __x__ by (x) in string s.'''
+def replace_parentheses(s):
+    '''Replaces `__x__` by ` (x)` in string s.'''
     out = s.replace('__','_(', 1).replace('__',')', 1)
     if out == s: return out
     return replace_parentheses(out)

@@ -46,6 +46,13 @@ nb_path: "01_case.ipynb"
     
 <div class="cell border-box-sizing code_cell rendered">
 
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+
 <div class="output_wrapper">
 <div class="output">
 
@@ -55,6 +62,7 @@ nb_path: "01_case.ipynb"
 <div class="output_markdown rendered_html output_subarea ">
 <h4 id="replace_parentheses" class="doc_header"><code>replace_parentheses</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L12" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>replace_parentheses</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
+<p>Replaces <code>__x__</code> by <code>(x)</code> in string s.</p>
 
 </div>
 
@@ -69,6 +77,17 @@ nb_path: "01_case.ipynb"
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_eq</span><span class="p">(</span><span class="n">replace_parentheses</span><span class="p">(</span><span class="s1">&#39;hi__there__&#39;</span><span class="p">),</span> <span class="s1">&#39;hi_(there)&#39;</span><span class="p">)</span>
+<span class="n">test_eq</span><span class="p">(</span><span class="n">replace_parentheses</span><span class="p">(</span><span class="s1">&#39;hi__there____bye__&#39;</span><span class="p">),</span> <span class="s1">&#39;hi_(there)_(bye)&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
     {% endraw %}
@@ -91,7 +110,7 @@ nb_path: "01_case.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="snake2words" class="doc_header"><code>snake2words</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L21" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>snake2words</code>(<strong><code>s</code></strong>)</p>
+<h4 id="snake2words" class="doc_header"><code>snake2words</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L22" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>snake2words</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
 
 </div>
@@ -139,8 +158,9 @@ nb_path: "01_case.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="replace_acronyms" class="doc_header"><code>replace_acronyms</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L26" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>replace_acronyms</code>(<strong><code>s</code></strong>)</p>
+<h4 id="replace_acronyms" class="doc_header"><code>replace_acronyms</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L27" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>replace_acronyms</code>(<strong><code>s</code></strong>)</p>
 </blockquote>
+<p>Replaces acronyms in s by its capitalized version.</p>
 
 </div>
 
@@ -204,7 +224,7 @@ nb_path: "01_case.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h4 id="DataFrame.rename2words" class="doc_header"><code>DataFrame.rename2words</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L32" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.rename2words</code>()</p>
+<h4 id="DataFrame.rename2words" class="doc_header"><code>DataFrame.rename2words</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L34" class="source_link" style="float:right">[source]</a></h4><blockquote><p><code>DataFrame.rename2words</code>()</p>
 </blockquote>
 <p>Renames columns in snake_case to Words.</p>
 
@@ -387,7 +407,7 @@ nb_path: "01_case.ipynb"
 
 
 <div class="output_markdown rendered_html output_subarea ">
-<h2 id="PxLabeler" class="doc_header"><code>class</code> <code>PxLabeler</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L38" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PxLabeler</code>()</p>
+<h2 id="PxLabeler" class="doc_header"><code>class</code> <code>PxLabeler</code><a href="https://github.com/ababino/pdpatch/tree/main/pdpatch/case.py#L40" class="source_link" style="float:right">[source]</a></h2><blockquote><p><code>PxLabeler</code>()</p>
 </blockquote>
 
 </div>

@@ -8,14 +8,14 @@
 
 ## How to use
 
-```python
+```
 from pdpatch.core import *
 ```
 
 ### Utility functions
 
 
-```python
+```
 df = dummydf()
 df
 ```
@@ -87,7 +87,7 @@ df
 `df.rename(columns={'col_1': 'new_name'})`->`df.renamec({'col_1': 'new_name'})`
 
 
-```python
+```
 df.renamec({'col_1': 'new_name'})
 ```
 
@@ -152,7 +152,7 @@ df.renamec({'col_1': 'new_name'})
 
 
 
-```python
+```
 df.len()
 ```
 
@@ -167,7 +167,7 @@ df.len()
 
 
 
-```python
+```
 df.col_1.minmax
 ```
 
