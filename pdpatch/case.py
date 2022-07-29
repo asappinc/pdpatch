@@ -9,7 +9,8 @@ from fastcore.all import *
 from .core import *
 
 # Cell
-def replace_parentheses(s):
+def replace_parentheses(s:int):
+    '''Replaces __x__ by (x) in string s.'''
     out = s.replace('__','_(', 1).replace('__',')', 1)
     if out == s: return out
     return replace_parentheses(out)
@@ -24,6 +25,7 @@ def snake2words(s):
 # Cell
 acronyms = ['MAE', 'RMSE']
 def replace_acronyms(s):
+    '''Replaces acronyms in s by its capitalized version.'''
     if is_listy(s): return [replace_acronyms(o) for o in s]
     for o in acronyms: s=s.replace(o.lower(), o).replace(o.capitalize(), o)
     return s
