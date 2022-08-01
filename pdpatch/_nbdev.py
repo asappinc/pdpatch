@@ -31,7 +31,9 @@ index = {"dummydf": "00_core.ipynb",
          "acronyms": "01_case.ipynb",
          "pd.DataFrame.rename2words": "01_case.ipynb",
          "PxLabeler": "01_case.ipynb",
-         "px_labeler": "01_case.ipynb"}
+         "px_labeler": "01_case.ipynb",
+         "Express": "01_case.ipynb",
+         "px": "01_case.ipynb"}
 
 modules = ["core.py",
            "case.py"]
