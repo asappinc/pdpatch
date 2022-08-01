@@ -29,6 +29,7 @@ conda_release:
 
 pypi: dist
 	twine upload --repository pypi dist/*
+	nbdev_bump_version
 
 dist: clean
 	python setup.py sdist bdist_wheel
