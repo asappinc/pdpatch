@@ -140,3 +140,10 @@ checklink/cookies.txt
 .gitconfig
 
 conda*
+_docs/
+sidebar.yml
+_docs/
+sidebar.yml
+
+/.quarto/
+_env
