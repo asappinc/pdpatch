@@ -144,3 +144,6 @@ _docs/
 sidebar.yml
 _docs/
 sidebar.yml
+
+/.quarto/
+_env

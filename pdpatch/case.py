@@ -23,24 +23,27 @@ def replace_parentheses(s):
 _par_re = re.compile(r'((?<=\()[A-Z])')
 
 # %% ../01_case.ipynb 9
-def snake2words(s): 
+def snake2words(s):
+    '''Return properly capitalized version of snake_case string `s`'''
     return re.sub(_par_re, lambda x: x.group(0).lower(), ' '.join(replace_parentheses(s).title().split('_')))
 
 # %% ../01_case.ipynb 11
 acronyms = ['MAE', 'RMSE']
+
+# %% ../01_case.ipynb 12
 def replace_acronyms(s):
     '''Replaces acronyms in s by its capitalized version.'''
     if is_listy(s): return [replace_acronyms(o) for o in s]
     for o in acronyms: s=s.replace(o.lower(), o).replace(o.capitalize(), o)
     return s
 
-# %% ../01_case.ipynb 14
+# %% ../01_case.ipynb 17
 @patch
 def rename2words(self:pd.DataFrame): 
     '''Renames columns in snake_case to Words.'''
     return self.renamec(snake2words).renamec(replace_acronyms)
 
-# %% ../01_case.ipynb 17
+# %% ../01_case.ipynb 20
 class PxLabeler:
     '''Behaves like a dictionary from snake_case --> Snake Case.'''
     def __getitem__(self, item): return replace_acronyms(snake2words(item))
@@ -48,7 +51,7 @@ class PxLabeler:
     __repr__ = __str__
 px_labeler = PxLabeler()
 
-# %% ../01_case.ipynb 22
+# %% ../01_case.ipynb 25
 class Express:
     '''Like `plotly.express` but defaults to labels=`px_labeler`'''
     def __getattr__(self, attr):
