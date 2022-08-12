@@ -23,14 +23,14 @@ website:
   open-graph: true
   reader-mode: true
   repo-branch: main
-  repo-url: https://github.com/ababino/pdpatch/tree/main/
+  repo-url: https://github.com/asappinc/pdpatch/tree/main/
   repo-actions: [issue]
   navbar:
     background: primary
     search: true
     right:
       - icon: github
-        href: https://github.com/ababino/pdpatch/tree/main/
+        href: https://github.com/asappinc/pdpatch/tree/main/
   sidebar:
     style: "floating"
 

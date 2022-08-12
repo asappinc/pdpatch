@@ -18,6 +18,7 @@ def title(self:pd.DataFrame, title):
     out = widgets.Output()
     with out: display(self)
     layout = widgets.Layout(align_items='center')
+    return widgets.VBox([widgets.Label(title, layout=layout), out])
 
 # %% ../02_display.ipynb 5
 class Walker:
@@ -78,3 +79,11 @@ def less(self:pd.DataFrame, page_size=5, page=1, where=None):
 def less(self:pd.Series, page_size=5, where=None):
     '''Displays one page of the Series and buttons to move forward and backward.'''
     return Less(self, page_size=page_size, where=where).out
+
+# %% ../02_display.ipynb 12
+@patch
+def to_percent(self:pd.DataFrame, exclude=[]):
+    'Formats float columns to percentage.'
+    cols = self.dtypes[self.dtypes=='float'].index
+    cols = [c for c in cols if c not in exclude]
+    return self.style.format({c: '{:.1%}'.format for c in cols})

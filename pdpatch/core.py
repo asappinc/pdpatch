@@ -73,18 +73,18 @@ def minmax(self:pd.Series): return (self.min(), self.max())
 
 # %% ../00_core.ipynb 34
 @patch
-def page(self:pd.DataFrame, page, page_size=5): return self.head(page*page_size).tail(page_size)
+def page(self:pd.DataFrame, page, page_size=5):
+    'Shows rows between `page*page_size` and `(page+1)*page_size`'
+    return self.head(page*page_size).tail(min(self.len()-(page-1)*page_size, page_size))
 
-# %% ../00_core.ipynb 35
-add_docs(pd.DataFrame, page='Shows rows from page*page_size to (page+1)*page_size')
+# %% ../00_core.ipynb 36
+@patch
+def page(self:pd.Series, page, page_size=5):
+    'Shows rows between `page*page_size` and `(page+1)*page_size`'
+    return self.head(page*page_size).tail(min(self.len()-(page-1)*page_size, page_size))
 
 # %% ../00_core.ipynb 37
-@patch
-def page(self:pd.Series, page, page_size=5): return self.head(page*page_size).tail(page_size)
-
-# %% ../00_core.ipynb 38
 add_docs(pd.Series, 
-         page='Shows rows from page*page_size to (page+1)*page_size',
          ffill=pd.core.generic.NDFrame.ffill.__doc__,
          bfill=pd.core.generic.NDFrame.bfill.__doc__,
          clip=pd.core.generic.NDFrame.clip.__doc__,
@@ -93,63 +93,59 @@ add_docs(pd.Series,
          mask=pd.core.generic.NDFrame.mask.__doc__,
          len=len.__doc__)
 
-# %% ../00_core.ipynb 42
+# %% ../00_core.ipynb 41
 @patch
-def renamec(self:pd.DataFrame, d, *args):
+def renamec(self:pd.DataFrame, d, *args, **kwargs):
     if args:
         if isinstance(d, dict): d = chain(*d.items())
         d = dict(chunked(listify(d) + listify(args), 2))
-    return self.rename(columns=d)
+    return self.rename(columns=d, **kwargs)
 
-# %% ../00_core.ipynb 44
+# %% ../00_core.ipynb 43
 add_docs(pd.DataFrame, renamec='Renames column names.')
 
-# %% ../00_core.ipynb 45
+# %% ../00_core.ipynb 44
 @patch
 def notin(self:pd.Series, values): return ~self.isin(values)
 
-# %% ../00_core.ipynb 46
+# %% ../00_core.ipynb 45
 add_docs(pd.Series, notin='Whether elements in Series are not contained in `values`.')
 
-# %% ../00_core.ipynb 47
+# %% ../00_core.ipynb 46
 @patch
 def mapk(self:pd.Series, fun, **kwargs): return self.map(partial(fun, **kwargs))
 
-# %% ../00_core.ipynb 48
+# %% ../00_core.ipynb 47
 add_docs(pd.Series, mapk='Like map but passes kwargs to function.')
 
-# %% ../00_core.ipynb 56
+# %% ../00_core.ipynb 48
 @patch
-def to_percent(self:pd.DataFrame, exclude=[]):
-    cols = self.dtypes[self.dtypes=='float'].index
-    cols = [c for c in cols if c not in exclude]
-    return self.style.format({c: '{:.1%}'.format for c in cols})
+@delegates(pd.DataFrame.sort_values)
+def sort(self:pd.DataFrame, by, **kwargs): return self.sort_values(by, **kwargs)
 
-# %% ../00_core.ipynb 57
-add_docs(pd.DataFrame,
-#          less='Displays one page of the DataFrame and buttons to move forward and backward.',
-         to_percent='Formats float columns to percentage.')
+# %% ../00_core.ipynb 49
+add_docs(pd.DataFrame, sort=pd.DataFrame.sort_values.__doc__)
 
-# %% ../00_core.ipynb 64
+# %% ../00_core.ipynb 52
 @patch
 def c2back(self:pd.DataFrame, cols2back):
     if not is_listy(cols2back): cols2back = [cols2back]
     cols = [c for c in self.columns if c not in cols2back]+cols2back
     return self[cols]
 
-# %% ../00_core.ipynb 65
+# %% ../00_core.ipynb 53
 @patch
 def c2front(self:pd.DataFrame, cols2front):
     if not is_listy(cols2front): cols2front = [cols2front]
     cols = cols2front + [c for c in self.columns if c not in cols2front]
     return self[cols]
 
-# %% ../00_core.ipynb 66
+# %% ../00_core.ipynb 54
 add_docs(pd.DataFrame,
          c2back="Move columns to back",
          c2front="Move columns to front")
 
-# %% ../00_core.ipynb 72
+# %% ../00_core.ipynb 60
 @patch
 def reorderc(self:pd.DataFrame, to_front=[], to_back=[]):
     '''Reorder DataFrame columns.'''
