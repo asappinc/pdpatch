@@ -16,21 +16,22 @@ format:
 
 website:
   title: "pdpatch"
-  description: "Methods for pandas DataFrame and Series."
+  site-url: "https://asappinc.github.io/pdpatch/"
+  description: "New methods for pandas DataFrame and Series."
   execute: 
     enabled: false
   twitter-card: true
   open-graph: true
   reader-mode: true
   repo-branch: main
-  repo-url: https://github.com/asappinc/pdpatch/tree/main/
+  repo-url: "https://github.com/asappinc/pdpatch/tree/main/"
   repo-actions: [issue]
   navbar:
     background: primary
     search: true
     right:
       - icon: github
-        href: https://github.com/asappinc/pdpatch/tree/main/
+        href: "https://github.com/asappinc/pdpatch/tree/main/"
   sidebar:
     style: "floating"
 
