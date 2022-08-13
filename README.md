@@ -21,6 +21,7 @@ from pdpatch.all import *
 
 ``` python
 import pandas as pd
+from pdpatch.express import *
 df = pd.DataFrame({'time__s__': range(10), 'position__m__': range(10)})
 px.scatter(df, x='time__s__', y='position__m__').show('png')
 ```
@@ -32,6 +33,7 @@ px.scatter(df, x='time__s__', y='position__m__').show('png')
 `df.rename(columns={'col_1': 'new_name'})`-\>`df.renamec({'col_1': 'new_name'})`
 
 ``` python
+df = dummydf()
 df.renamec({'col_1': 'new_name'})
 ```
 
