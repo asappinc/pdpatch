@@ -5,8 +5,6 @@ __all__ = ['acronyms', 'px_labeler', 'replace_parentheses', 'snake2words', 'repl
            'rename2words_cols_and_index']
 
 # %% ../01_case.ipynb 3
-# from functools import partial, wraps
-# import inspect
 import re
 import pandas as pd
 from plotly import express

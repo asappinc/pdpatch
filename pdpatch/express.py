@@ -6,7 +6,6 @@ __all__ = ['px', 'update_legend_and_yaxis', 'Express']
 # %% ../03_express.ipynb 3
 from functools import partial, wraps
 import inspect
-# import re
 import pandas as pd
 from plotly import express
 from fastcore.all import *

@@ -8,6 +8,7 @@ import inspect
 from functools import wraps
 import seaborn
 from .case import *
+from fastcore.all import *
 
 # %% ../04_seaborn.ipynb 4
 def if_is_else(fun, x, t):
