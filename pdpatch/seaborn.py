@@ -48,6 +48,6 @@ class Seaborn:
         if attr in self.rename_attr:
             return renamer(fun)
         else:
-            return renamer(fun)
+            return fun
     __dir__ = seaborn.__dir__
 sns = Seaborn()
