@@ -39,7 +39,7 @@ px.scatter(df, x='time__s__', y='position__m__').show('png')
 
 ``` python
 df = dummydf()
-df.renamec({'col_1': 'new_name'})
+df.renamec({'col_1': 'new_name'}).to_html()
 ```
 
 <div>
@@ -114,7 +114,7 @@ df.col_1.minmax
 
 ``` python
 df = dummydf()
-df
+df.to_html()
 ```
 
 <div>
