@@ -31,7 +31,7 @@ df = pd.DataFrame({'time__s__': range(10), 'position__m__': range(10)})
 px.scatter(df, x='time__s__', y='position__m__').show('png')
 ```
 
-![](index_files/figure-gfm/cell-4-output-1.png)
+![](index_files/figure-gfm/cell-3-output-1.png)
 
 ### Shorter methods
 
@@ -39,80 +39,60 @@ px.scatter(df, x='time__s__', y='position__m__').show('png')
 
 ``` python
 df = dummydf()
-df.renamec({'col_1': 'new_name'}).to_html()
+df.renamec({'col_1': 'new_name'})
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>
-</th>
-<th>
-new_name
-</th>
-<th>
-col_2
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>
-0
-</th>
-<td>
-100
-</td>
-<td>
-a
-</td>
-</tr>
-<tr>
-<th>
-1
-</th>
-<td>
-101
-</td>
-<td>
-b
-</td>
-</tr>
-<tr>
-<th>
-2
-</th>
-<td>
-102
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<th>
-3
-</th>
-<td>
-103
-</td>
-<td>
-d
-</td>
-</tr>
-<tr>
-<th>
-4
-</th>
-<td>
-104
-</td>
-<td>
-e
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>new_name</th>
+      <th>col_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>d</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>104</td>
+      <td>e</td>
+    </tr>
+  </tbody>
 </table>
+</div>
 
 ### Functions as methods
 
@@ -134,77 +114,57 @@ df.col_1.minmax
 
 ``` python
 df = dummydf()
-df.to_html()
+df
 ```
 
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
-<thead>
-<tr style="text-align: right;">
-<th>
-</th>
-<th>
-col_1
-</th>
-<th>
-col_2
-</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<th>
-0
-</th>
-<td>
-100
-</td>
-<td>
-a
-</td>
-</tr>
-<tr>
-<th>
-1
-</th>
-<td>
-101
-</td>
-<td>
-b
-</td>
-</tr>
-<tr>
-<th>
-2
-</th>
-<td>
-102
-</td>
-<td>
-c
-</td>
-</tr>
-<tr>
-<th>
-3
-</th>
-<td>
-103
-</td>
-<td>
-d
-</td>
-</tr>
-<tr>
-<th>
-4
-</th>
-<td>
-104
-</td>
-<td>
-e
-</td>
-</tr>
-</tbody>
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>col_1</th>
+      <th>col_2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>d</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>104</td>
+      <td>e</td>
+    </tr>
+  </tbody>
 </table>
+</div>
