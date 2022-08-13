@@ -38,8 +38,16 @@ def renamer(fun):
 # %% ../04_seaborn.ipynb 6
 class Seaborn:
     '''Like `express` but renames all columns from snake_case to Words.'''
+    
+    rename_attr = ['scatterplot', 'lineplot', 'displot', 'histplot', 'kdeplot', 'ecdfplot', 'rugplot', 'distplot',
+                   'catplot', 'stripplot', 'swarmplot', 'boxplot', 'violinplot', 'boxenplot', 'pointplot', 'barplot',
+                   'countplot', 'lmplot', 'regplot', 'residplot', 'heatmap', 'clustermap', 'FacetGrid', 'pairplot',
+                   'PairGrid', 'jointplot', 'JointGrid']
     def __getattr__(self, attr):
         fun = getattr(seaborn, attr)
-        return renamer(fun)
+        if attr in self.rename_attr:
+            return renamer(fun)
+        else:
+            return renamer(fun)
     __dir__ = seaborn.__dir__
 sns = Seaborn()
