@@ -79,8 +79,4 @@ d = { 'settings': { 'allowed_cell_metadata_keys': '',
                                  'pdpatch.express.update_legend_and_yaxis': 'https://asappinc.github.io/pdpatch/express.html#update_legend_and_yaxis'},
             'pdpatch.seaborn': { 'pdpatch.seaborn.Seaborn': 'https://asappinc.github.io/pdpatch/seaborn.html#seaborn',
                                  'pdpatch.seaborn.renamer': 'https://asappinc.github.io/pdpatch/seaborn.html#renamer',
-                                 'pdpatch.seaborn.sns': 'https://asappinc.github.io/pdpatch/seaborn.html#sns'},
-            'pdpatch.viz': { 'pdpatch.viz.front_of_queue_hist': 'https://asappinc.github.io/pdpatch/viz.html#front_of_queue_hist',
-                             'pdpatch.viz.plot_line_skippers': 'https://asappinc.github.io/pdpatch/viz.html#plot_line_skippers',
-                             'pdpatch.viz.plot_t2eacia_ecdf': 'https://asappinc.github.io/pdpatch/viz.html#plot_t2eacia_ecdf',
-                             'pdpatch.viz.plot_t2eacia_ecdf_bar': 'https://asappinc.github.io/pdpatch/viz.html#plot_t2eacia_ecdf_bar'}}}
+                                 'pdpatch.seaborn.sns': 'https://asappinc.github.io/pdpatch/seaborn.html#sns'}}}
