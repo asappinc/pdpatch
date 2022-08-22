@@ -34,19 +34,20 @@ acronyms = ['MAE', 'RMSE', 'R2']
 def replace_acronyms(s):
     '''Replaces acronyms in s by its capitalized version.'''
     if is_listy(s): return [replace_acronyms(o) for o in s]
-    for o in acronyms: s=s.replace(o.lower(), o).replace(o.capitalize(), o).replace(o.title(), o)
+    for o in acronyms:
+        s = re.sub(rf'\b({o.lower()}|{o.capitalize()}|{o.title()})\b', o, s)
     return s
 
-# %% ../01_case.ipynb 18
+# %% ../01_case.ipynb 19
 def if_instance(fun, t, x): return fun(x) if isinstance(x, t) else x
 
-# %% ../01_case.ipynb 19
+# %% ../01_case.ipynb 20
 def snake2words_replace_acronyms(x): return  replace_acronyms(snake2words(x))
 
-# %% ../01_case.ipynb 20
+# %% ../01_case.ipynb 21
 def snake2words_replace_acronyms_if_str(x): return if_instance(snake2words_replace_acronyms, str, x)
 
-# %% ../01_case.ipynb 21
+# %% ../01_case.ipynb 22
 @patch
 def rename2words(self:pd.DataFrame, rename_index_name=True, rename_column_name=True): 
     '''Renames columns in snake_case to Words.'''
@@ -57,7 +58,7 @@ def rename2words(self:pd.DataFrame, rename_index_name=True, rename_column_name=T
         out.index.name = snake2words_replace_acronyms_if_str(out.index.name)
     return out
 
-# %% ../01_case.ipynb 24
+# %% ../01_case.ipynb 25
 class PxLabeler:
     '''Behaves like a dictionary from snake_case --> Snake Case.'''
     def __init__(self): self.default_dict = {}
