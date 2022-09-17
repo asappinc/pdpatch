@@ -22,7 +22,7 @@ from pdpatch.all import *
 
 ![Alt Text](less15_360.gif)
 
-### Automatically Rename snake_case columns in `plotly.express`
+### Automatically Rename snake_case columns in `plotly.express` and `seaborn`
 
 ``` python
 import pandas as pd
@@ -33,13 +33,20 @@ px.scatter(df, x='time__s__', y='position__m__').show('png')
 
 ![](index_files/figure-gfm/cell-3-output-1.png)
 
+``` python
+from pdpatch.seaborn import sns
+sns.scatterplot(data=df, x='time__s__', y='position__m__');
+```
+
+![](index_files/figure-gfm/cell-4-output-1.png)
+
 ### Shorter methods
 
-`df.rename(columns={'col_1': 'new_name'})`-\>`df.renamec({'col_1': 'new_name'})`
+`df.rename(columns={'col_1': 'new_name'})`-\>`df.renamec('col_1', 'new_name')`
 
 ``` python
 df = dummydf()
-df.renamec({'col_1': 'new_name'}).to_html()
+df.renamec('col_1', 'new_name').to_html()
 ```
 
 <table border="1" class="dataframe">

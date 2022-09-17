@@ -4,12 +4,15 @@
 __all__ = ['sns', 'renamer', 'Seaborn']
 
 # %% ../04_seaborn.ipynb 2
-import inspect
 from functools import wraps
+import inspect
 from operator import methodcaller
-import seaborn
-from .case import *
+
 from fastcore.all import *
+import pandas as pd
+import seaborn
+
+from .case import *
 
 # %% ../04_seaborn.ipynb 4
 def renamer(fun):
