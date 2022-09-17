@@ -15,9 +15,7 @@ from fastcore.all import *
 def renamer(fun):
     @wraps(fun)
     def _inner(*args, **kwargs):
-#         new_args = [if_is_else(rename2words_cols_and_index, x, pd.DataFrame) for x in args]
         new_args = [if_instance(methodcaller('rename2words'), pd.DataFrame, x) for x in args]
-#         new_args = [if_is_else(snake2words_if_str, x, str) for x in new_args]
         new_args = [snake2words_replace_acronyms_if_str(x) for x in new_args]
         args = tuple(new_args)
         for k in kwargs:
