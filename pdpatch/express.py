@@ -3,23 +3,30 @@
 # %% auto 0
 __all__ = ['px', 'set_template', 'update_legend_and_yaxis', 'Express']
 
-# %% ../03_express.ipynb 3
+# %% ../03_express.ipynb 4
 from functools import partial, wraps
 import inspect
+
 import pandas as pd
 from plotly import express
+from plotly.graph_objects import Figure
 import plotly.io as pio
+
 from fastcore.all import *
 from .core import *
 from .case import *
 
-# %% ../03_express.ipynb 5
+# %% ../03_express.ipynb 6
 def set_template(template_name):
     pio.templates.default = template_name
     set_template.__doc__  = str(pio.templates)
 set_template.__doc__  = str(pio.templates)
 
-# %% ../03_express.ipynb 9
+# %% ../03_express.ipynb 12
+pio.templates['seaborn'].layout.shapedefaults.pop('line')
+pio.templates['seaborn'].layout.shapedefaults.pop('opacity');
+
+# %% ../03_express.ipynb 15
 def update_legend_and_yaxis(fun):
     @wraps(fun)
     def _inner(*args, **kwargs):
@@ -38,7 +45,7 @@ def update_legend_and_yaxis(fun):
         return fig
     return _inner
 
-# %% ../03_express.ipynb 10
+# %% ../03_express.ipynb 16
 class Express:
     '''Like `plotly.express` but defaults to labels=`px_labeler`'''
     def __getattr__(self, attr):

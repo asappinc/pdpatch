@@ -10,19 +10,20 @@ import math
 
 from fastcore.all import *
 import pandas as pd
-# import ipywidgets as widgets
-# from IPython.display import display
 
 # %% ../00_core.ipynb 5
-def dummydf(): return pd.DataFrame({'col_1': range(100, 105), 'col_2': ['a','b','c','d','e']})
+def dummydf():
+    '''A dummy DataFrame.'''
+    return pd.DataFrame({'col_1': range(100, 105), 'col_2': ['a','b','c','d','e']})
 
 # %% ../00_core.ipynb 7
 @patch
-def repetitions(self:pd.DataFrame, col): return self.groupby(col).size()
+def repetitions(self:pd.DataFrame, col):
+    '''Counts the number of repetitions for each element.'''
+    return self.groupby(col).size()
 
 # %% ../00_core.ipynb 8
 add_docs(pd.DataFrame,
-         repetitions='Counts the number of repetitions for each element.',
          ffill=pd.core.generic.NDFrame.ffill.__doc__,
          bfill=pd.core.generic.NDFrame.bfill.__doc__,
          clip=pd.core.generic.NDFrame.clip.__doc__,
@@ -30,56 +31,56 @@ add_docs(pd.DataFrame,
          where=pd.core.generic.NDFrame.where.__doc__,
          mask=pd.core.generic.NDFrame.mask.__doc__)
 
-# %% ../00_core.ipynb 13
+# %% ../00_core.ipynb 12
+#| echo: false
 @patch
-def repetition_counts(self:pd.DataFrame, col): return self.repetitions(col).value_counts()
+def repetition_counts(self:pd.DataFrame, col):
+    '''Counts the number of groups with the same number of repetitions.'''
+    return self.repetitions(col).value_counts()
 
-# %% ../00_core.ipynb 14
-add_docs(pd.DataFrame,repetition_counts='Counts the number of groups with the same number of repetitions.')
-
-# %% ../00_core.ipynb 19
+# %% ../00_core.ipynb 16
 @patch
 def single_events(self:pd.DataFrame, col): return self.set_index(col).loc[self.repetitions(col)==1].reset_index()
 
-# %% ../00_core.ipynb 20
+# %% ../00_core.ipynb 17
 add_docs(pd.DataFrame, single_events='Returns rows that appear only once.')
 
-# %% ../00_core.ipynb 26
+# %% ../00_core.ipynb 23
 @patch
 def crosstab(self:pd.DataFrame, index, column, **kwargs): return pd.crosstab(self[index], self[column], **kwargs)
 
-# %% ../00_core.ipynb 27
+# %% ../00_core.ipynb 24
 @patch
 def len(self:pd.DataFrame): return len(self)
 
-# %% ../00_core.ipynb 28
+# %% ../00_core.ipynb 25
 add_docs(pd.DataFrame, crosstab=pd.crosstab.__doc__, len=len.__doc__)
 
-# %% ../00_core.ipynb 29
+# %% ../00_core.ipynb 26
 @patch
 def len(self:pd.Series): return len(self)
 
-# %% ../00_core.ipynb 31
+# %% ../00_core.ipynb 28
 @patch(as_prop=True)
 def l(self:pd.Index): return L(self, use_list=True)
 
-# %% ../00_core.ipynb 32
+# %% ../00_core.ipynb 29
 @patch(as_prop=True)
 def minmax(self:pd.Series): return (self.min(), self.max())
 
-# %% ../00_core.ipynb 33
+# %% ../00_core.ipynb 30
 @patch
 def page(self:pd.DataFrame, page, page_size=5):
     'Shows rows between `page*page_size` and `(page+1)*page_size`'
     return self.head(page*page_size).tail(min(self.len()-(page-1)*page_size, page_size))
 
-# %% ../00_core.ipynb 35
+# %% ../00_core.ipynb 32
 @patch
 def page(self:pd.Series, page, page_size=5):
     'Shows rows between `page*page_size` and `(page+1)*page_size`'
     return self.head(page*page_size).tail(min(self.len()-(page-1)*page_size, page_size))
 
-# %% ../00_core.ipynb 36
+# %% ../00_core.ipynb 33
 add_docs(pd.Series, 
          ffill=pd.core.generic.NDFrame.ffill.__doc__,
          bfill=pd.core.generic.NDFrame.bfill.__doc__,
@@ -89,7 +90,7 @@ add_docs(pd.Series,
          mask=pd.core.generic.NDFrame.mask.__doc__,
          len=len.__doc__)
 
-# %% ../00_core.ipynb 40
+# %% ../00_core.ipynb 37
 @patch
 def renamec(self:pd.DataFrame, d, *args, **kwargs):
     if args:
@@ -97,50 +98,50 @@ def renamec(self:pd.DataFrame, d, *args, **kwargs):
         d = dict(chunked(listify(d) + listify(args), 2))
     return self.rename(columns=d, **kwargs)
 
-# %% ../00_core.ipynb 42
+# %% ../00_core.ipynb 39
 add_docs(pd.DataFrame, renamec='Renames column names.')
 
-# %% ../00_core.ipynb 43
+# %% ../00_core.ipynb 40
 @patch
 def notin(self:pd.Series, values): return ~self.isin(values)
 
-# %% ../00_core.ipynb 44
+# %% ../00_core.ipynb 41
 add_docs(pd.Series, notin='Whether elements in Series are not contained in `values`.')
 
-# %% ../00_core.ipynb 45
+# %% ../00_core.ipynb 42
 @patch
 def mapk(self:pd.Series, fun, **kwargs): return self.map(partial(fun, **kwargs))
 
-# %% ../00_core.ipynb 46
+# %% ../00_core.ipynb 43
 add_docs(pd.Series, mapk='Like map but passes kwargs to function.')
 
-# %% ../00_core.ipynb 47
+# %% ../00_core.ipynb 44
 @patch
 def sort(self:pd.DataFrame, by, **kwargs): return self.sort_values(by, **kwargs)
 
-# %% ../00_core.ipynb 48
+# %% ../00_core.ipynb 45
 add_docs(pd.DataFrame, sort=pd.DataFrame.sort_values.__doc__)
 
-# %% ../00_core.ipynb 51
+# %% ../00_core.ipynb 48
 @patch
 def c2back(self:pd.DataFrame, cols2back):
     if not is_listy(cols2back): cols2back = [cols2back]
     cols = [c for c in self.columns if c not in cols2back]+cols2back
     return self[cols]
 
-# %% ../00_core.ipynb 52
+# %% ../00_core.ipynb 49
 @patch
 def c2front(self:pd.DataFrame, cols2front):
     if not is_listy(cols2front): cols2front = [cols2front]
     cols = cols2front + [c for c in self.columns if c not in cols2front]
     return self[cols]
 
-# %% ../00_core.ipynb 53
+# %% ../00_core.ipynb 50
 add_docs(pd.DataFrame,
          c2back="Move columns to back",
          c2front="Move columns to front")
 
-# %% ../00_core.ipynb 59
+# %% ../00_core.ipynb 56
 @patch
 def reorderc(self:pd.DataFrame, to_front=[], to_back=[]):
     '''Reorder DataFrame columns.'''
