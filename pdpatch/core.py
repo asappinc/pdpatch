@@ -90,7 +90,15 @@ add_docs(pd.Series,
          mask=pd.core.generic.NDFrame.mask.__doc__,
          len=len.__doc__)
 
-# %% ../00_core.ipynb 37
+# %% ../00_core.ipynb 35
+@patch
+def page(self:L, page, page_size=10):
+    'Shows elements between `page*page_size` and `(page+1)*page_size`'
+    if page==-1:
+        return self[page*page_size:]
+    return self[page*page_size:(page+1)*page_size]
+
+# %% ../00_core.ipynb 38
 @patch
 def renamec(self:pd.DataFrame, d, *args, **kwargs):
     if args:
@@ -98,50 +106,50 @@ def renamec(self:pd.DataFrame, d, *args, **kwargs):
         d = dict(chunked(listify(d) + listify(args), 2))
     return self.rename(columns=d, **kwargs)
 
-# %% ../00_core.ipynb 39
+# %% ../00_core.ipynb 40
 add_docs(pd.DataFrame, renamec='Renames column names.')
 
-# %% ../00_core.ipynb 40
+# %% ../00_core.ipynb 41
 @patch
 def notin(self:pd.Series, values): return ~self.isin(values)
 
-# %% ../00_core.ipynb 41
+# %% ../00_core.ipynb 42
 add_docs(pd.Series, notin='Whether elements in Series are not contained in `values`.')
 
-# %% ../00_core.ipynb 42
+# %% ../00_core.ipynb 43
 @patch
 def mapk(self:pd.Series, fun, **kwargs): return self.map(partial(fun, **kwargs))
 
-# %% ../00_core.ipynb 43
+# %% ../00_core.ipynb 44
 add_docs(pd.Series, mapk='Like map but passes kwargs to function.')
 
-# %% ../00_core.ipynb 44
+# %% ../00_core.ipynb 45
 @patch
 def sort(self:pd.DataFrame, by, **kwargs): return self.sort_values(by, **kwargs)
 
-# %% ../00_core.ipynb 45
+# %% ../00_core.ipynb 46
 add_docs(pd.DataFrame, sort=pd.DataFrame.sort_values.__doc__)
 
-# %% ../00_core.ipynb 48
+# %% ../00_core.ipynb 49
 @patch
 def c2back(self:pd.DataFrame, cols2back):
     if not is_listy(cols2back): cols2back = [cols2back]
     cols = [c for c in self.columns if c not in cols2back]+cols2back
     return self[cols]
 
-# %% ../00_core.ipynb 49
+# %% ../00_core.ipynb 50
 @patch
 def c2front(self:pd.DataFrame, cols2front):
     if not is_listy(cols2front): cols2front = [cols2front]
     cols = cols2front + [c for c in self.columns if c not in cols2front]
     return self[cols]
 
-# %% ../00_core.ipynb 50
+# %% ../00_core.ipynb 51
 add_docs(pd.DataFrame,
          c2back="Move columns to back",
          c2front="Move columns to front")
 
-# %% ../00_core.ipynb 56
+# %% ../00_core.ipynb 57
 @patch
 def reorderc(self:pd.DataFrame, to_front=[], to_back=[]):
     '''Reorder DataFrame columns.'''

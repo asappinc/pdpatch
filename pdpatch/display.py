@@ -82,6 +82,12 @@ def less(self:pd.Series, page_size=5, where=None):
 
 # %% ../02_display.ipynb 12
 @patch
+def less(self:L, page_size=5, page=0, where=None):
+    '''Displays one page of the DataFrame and buttons to move forward and backward.'''
+    return Less(self, page_size=page_size, page=page, where=where).out
+
+# %% ../02_display.ipynb 13
+@patch
 def to_percent(self:pd.DataFrame, exclude=[]):
     'Formats float columns to percentage.'
     cols = self.dtypes[self.dtypes=='float'].index
