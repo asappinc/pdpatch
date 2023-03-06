@@ -42,7 +42,7 @@ class Less:
             
         self.out = widgets.Output(wait=True)
         self.out_df = widgets.Output(wait=True)
-        self.out_df.append_display_data(self.df.page(page, page_size=self.page_size))
+        with self.out_df: display(self.df.page(page, page_size=self.page_size))
         
         self.n_pages = len(df)//self.page_size+1
         self.page = Walker(val=page, min_val=1, max_val=self.n_pages)
@@ -67,24 +67,26 @@ class Less:
         with self.out_df: display(self.df.page(self.page.val, page_size=self.page_size))
         self.out_label.clear_output()
         with self.out_label: display(widgets.Label(f"page {self.page.val} of {self.n_pages}"))
+    
+    def _ipython_display_(self): return display(self.out)
 
 # %% ../02_display.ipynb 7
 @patch
 def less(self:pd.DataFrame, page_size=5, page=1, where=None):
     '''Displays one page of the DataFrame and buttons to move forward and backward.'''
-    return Less(self, page_size=page_size, page=page, where=where).out
+    return Less(self, page_size=page_size, page=page, where=where)
 
 # %% ../02_display.ipynb 10
 @patch
 def less(self:pd.Series, page_size=5, where=None):
     '''Displays one page of the Series and buttons to move forward and backward.'''
-    return Less(self, page_size=page_size, where=where).out
+    return Less(self, page_size=page_size, where=where)
 
 # %% ../02_display.ipynb 12
 @patch
 def less(self:L, page_size=5, page=0, where=None):
     '''Displays one page of the DataFrame and buttons to move forward and backward.'''
-    return Less(self, page_size=page_size, page=page, where=where).out
+    return Less(self, page_size=page_size, page=page, where=where)
 
 # %% ../02_display.ipynb 13
 @patch
