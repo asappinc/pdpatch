@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.475">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Monkey patches for pandas.">
+
+<title>pdpatch - core</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+<link rel="stylesheet" href="styles.css">
+<meta property="og:title" content="pdpatch - core">
+<meta property="og:description" content="Monkey patches for pandas.">
+<meta property="og:site-name" content="pdpatch">
+<meta name="twitter:title" content="pdpatch - core">
+<meta name="twitter:description" content="Monkey patches for pandas.">
+<meta name="twitter:card" content="summary">
+</head>
+
+<body class="nav-sidebar floating nav-fixed">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">pdpatch</span>
+    </a>
+  </div>
+          <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">core</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">pdpatch</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./core.html" class="sidebar-item-text sidebar-link active">core</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./case.html" class="sidebar-item-text sidebar-link">case</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./display.html" class="sidebar-item-text sidebar-link">display</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./express.html" class="sidebar-item-text sidebar-link">express</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./seaborn.html" class="sidebar-item-text sidebar-link">seaborn</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./05_transformer.html" class="sidebar-item-text sidebar-link">05_transformer.html</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#utils" id="toc-utils" class="nav-link active" data-scroll-target="#utils">Utils</a>
+  <ul class="collapse">
+  <li><a href="#dummydf" id="toc-dummydf" class="nav-link" data-scroll-target="#dummydf">dummydf</a></li>
+  </ul></li>
+  <li><a href="#transformations" id="toc-transformations" class="nav-link" data-scroll-target="#transformations">Transformations</a>
+  <ul class="collapse">
+  <li><a href="#dataframe.repetitions" id="toc-dataframe.repetitions" class="nav-link" data-scroll-target="#dataframe.repetitions">DataFrame.repetitions</a></li>
+  <li><a href="#dataframe.repetition_counts" id="toc-dataframe.repetition_counts" class="nav-link" data-scroll-target="#dataframe.repetition_counts">DataFrame.repetition_counts</a></li>
+  <li><a href="#dataframe.single_events" id="toc-dataframe.single_events" class="nav-link" data-scroll-target="#dataframe.single_events">DataFrame.single_events</a></li>
+  <li><a href="#dataframe.single_events-1" id="toc-dataframe.single_events-1" class="nav-link" data-scroll-target="#dataframe.single_events-1">DataFrame.single_events</a></li>
+  </ul></li>
+  <li><a href="#functions-as-methods" id="toc-functions-as-methods" class="nav-link" data-scroll-target="#functions-as-methods">Functions as methods</a>
+  <ul class="collapse">
+  <li><a href="#dataframe.crosstab" id="toc-dataframe.crosstab" class="nav-link" data-scroll-target="#dataframe.crosstab">DataFrame.crosstab</a></li>
+  <li><a href="#dataframe.len" id="toc-dataframe.len" class="nav-link" data-scroll-target="#dataframe.len">DataFrame.len</a></li>
+  <li><a href="#series.len" id="toc-series.len" class="nav-link" data-scroll-target="#series.len">Series.len</a></li>
+  </ul></li>
+  <li><a href="#one-liners" id="toc-one-liners" class="nav-link" data-scroll-target="#one-liners">One-liners</a>
+  <ul class="collapse">
+  <li><a href="#index.l" id="toc-index.l" class="nav-link" data-scroll-target="#index.l">Index.l</a></li>
+  <li><a href="#series.minmax" id="toc-series.minmax" class="nav-link" data-scroll-target="#series.minmax">Series.minmax</a></li>
+  <li><a href="#dataframe.page" id="toc-dataframe.page" class="nav-link" data-scroll-target="#dataframe.page">DataFrame.page</a></li>
+  <li><a href="#series.page" id="toc-series.page" class="nav-link" data-scroll-target="#series.page">Series.page</a></li>
+  <li><a href="#l.page" id="toc-l.page" class="nav-link" data-scroll-target="#l.page">L.page</a></li>
+  </ul></li>
+  <li><a href="#method-variations" id="toc-method-variations" class="nav-link" data-scroll-target="#method-variations">Method Variations</a>
+  <ul class="collapse">
+  <li><a href="#dataframe.renamec" id="toc-dataframe.renamec" class="nav-link" data-scroll-target="#dataframe.renamec">DataFrame.renamec</a></li>
+  <li><a href="#series.notin" id="toc-series.notin" class="nav-link" data-scroll-target="#series.notin">Series.notin</a></li>
+  <li><a href="#series.mapk" id="toc-series.mapk" class="nav-link" data-scroll-target="#series.mapk">Series.mapk</a></li>
+  <li><a href="#dataframe.sort" id="toc-dataframe.sort" class="nav-link" data-scroll-target="#dataframe.sort">DataFrame.sort</a></li>
+  </ul></li>
+  <li><a href="#move-columns-to-the-frontback" id="toc-move-columns-to-the-frontback" class="nav-link" data-scroll-target="#move-columns-to-the-frontback">Move columns to the front/back</a>
+  <ul class="collapse">
+  <li><a href="#dataframe.c2back" id="toc-dataframe.c2back" class="nav-link" data-scroll-target="#dataframe.c2back">DataFrame.c2back</a></li>
+  <li><a href="#dataframe.c2front" id="toc-dataframe.c2front" class="nav-link" data-scroll-target="#dataframe.c2front">DataFrame.c2front</a></li>
+  <li><a href="#dataframe.reorderc" id="toc-dataframe.reorderc" class="nav-link" data-scroll-target="#dataframe.reorderc">DataFrame.reorderc</a></li>
+  </ul></li>
+  </ul>
+<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/asappinc/pdpatch/tree/main/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">core</h1>
+</div>
+
+<div>
+  <div class="description">
+    Monkey patches for pandas.
+  </div>
+</div>
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<!-- WARNING: THIS FILE WAS AUTOGENERATED! DO NOT EDIT! -->
+<section id="utils" class="level2">
+<h2 class="anchored" data-anchor-id="utils">Utils</h2>
+<hr>
+<p><a href="https://github.com/asappinc/pdpatch/tree/main/blob/main/pdpatch/core.py#L15" target="_blank" style="float:right; font-size:smaller">source</a></p>
+<section id="dummydf" class="level3">
+<h3 class="anchored" data-anchor-id="dummydf">dummydf</h3>
+<blockquote class="blockquote">
+<pre><code> dummydf ()</code></pre>
+</blockquote>
+<p>A dummy DataFrame.</p>
+</section>
+</section>
+<section id="transformations" class="level2">
+<h2 class="anchored" data-anchor-id="transformations">Transformations</h2>
+<hr>
+<section id="dataframe.repetitions" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.repetitions">DataFrame.repetitions</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.repetitions (col)</code></pre>
+</blockquote>
+<p>Counts the number of repetitions for each element.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'a'</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">6</span>, <span class="dv">6</span>], <span class="st">'b'</span>:[<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">3</span>, <span class="dv">4</span>]})</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>df.repetitions(<span class="st">'b'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>b
+1    4
+2    3
+3    2
+4    1
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>test(df.repetitions(<span class="st">'b'</span>), pd.Series({<span class="dv">1</span>:<span class="dv">4</span>, <span class="dv">2</span>:<span class="dv">3</span>,<span class="dv">3</span>:<span class="dv">2</span>, <span class="dv">4</span>:<span class="dv">1</span>}), all_equal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="dataframe.repetition_counts" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.repetition_counts">DataFrame.repetition_counts</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.repetition_counts (col)</code></pre>
+</blockquote>
+<p>Counts the number of groups with the same number of repetitions.</p>
+<p>In the following example there are three groups with one element, two groups with two elements, and one group with three elements.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>df.repetition_counts(<span class="st">'a'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>1    3
+2    2
+3    1
+dtype: int64</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>test(df.repetition_counts(<span class="st">'a'</span>), pd.Series({<span class="dv">1</span>: <span class="dv">3</span>, <span class="dv">2</span>:<span class="dv">2</span>, <span class="dv">3</span>:<span class="dv">1</span>}), all_equal)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="dataframe.single_events" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.single_events">DataFrame.single_events</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.single_events (col)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="dataframe.single_events-1" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.single_events-1">DataFrame.single_events</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.single_events (col)</code></pre>
+</blockquote>
+<p>Returns rows that appear only once.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>df.single_events(<span class="st">'a'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>test_eq(df.single_events(<span class="st">'a'</span>), df.loc[[<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="functions-as-methods" class="level2">
+<h2 class="anchored" data-anchor-id="functions-as-methods">Functions as methods</h2>
+<p>Pandas functions that are easier to execute as DataFrame/Series methods.</p>
+<hr>
+<section id="dataframe.crosstab" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.crosstab">DataFrame.crosstab</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.crosstab (index, column, **kwargs)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="dataframe.len" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.len">DataFrame.len</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.len ()</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="series.len" class="level3">
+<h3 class="anchored" data-anchor-id="series.len">Series.len</h3>
+<blockquote class="blockquote">
+<pre><code> Series.len ()</code></pre>
+</blockquote>
+</section>
+</section>
+<section id="one-liners" class="level2">
+<h2 class="anchored" data-anchor-id="one-liners">One-liners</h2>
+<blockquote class="blockquote">
+<p>These methods allow fast exploration of the data in one line.</p>
+</blockquote>
+<hr>
+<section id="index.l" class="level3">
+<h3 class="anchored" data-anchor-id="index.l">Index.l</h3>
+<blockquote class="blockquote">
+<pre><code> Index.l ()</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="series.minmax" class="level3">
+<h3 class="anchored" data-anchor-id="series.minmax">Series.minmax</h3>
+<blockquote class="blockquote">
+<pre><code> Series.minmax ()</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="dataframe.page" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.page">DataFrame.page</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.page (page, page_size=5)</code></pre>
+</blockquote>
+<p>Shows rows between <code>page*page_size</code> and <code>(page+1)*page_size</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({<span class="st">'a'</span>: <span class="bu">range</span>(<span class="dv">12</span>), <span class="st">'b'</span>: <span class="bu">range</span>(<span class="dv">12</span>)})</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>df.page(<span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>a</th>
+      <th>b</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>10</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="series.page" class="level3">
+<h3 class="anchored" data-anchor-id="series.page">Series.page</h3>
+<blockquote class="blockquote">
+<pre><code> Series.page (page, page_size=5)</code></pre>
+</blockquote>
+<p>Shows rows between <code>page*page_size</code> and <code>(page+1)*page_size</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> pd.Series(<span class="bu">range</span>(<span class="dv">15</span>))</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>s.page(<span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+<pre><code>5    5
+6    6
+7    7
+8    8
+9    9
+dtype: int64</code></pre>
+</div>
+</div>
+<hr>
+<p><a href="https://github.com/asappinc/pdpatch/tree/main/blob/main/pdpatch/core.py#L95" target="_blank" style="float:right; font-size:smaller">source</a></p>
+</section>
+<section id="l.page" class="level3">
+<h3 class="anchored" data-anchor-id="l.page">L.page</h3>
+<blockquote class="blockquote">
+<pre><code> L.page (page, page_size=10)</code></pre>
+</blockquote>
+<p>Shows elements between <code>page*page_size</code> and <code>(page+1)*page_size</code></p>
+</section>
+</section>
+<section id="method-variations" class="level2">
+<h2 class="anchored" data-anchor-id="method-variations">Method Variations</h2>
+<p>These methods are slight variations from DataFrame ones.</p>
+<hr>
+<section id="dataframe.renamec" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.renamec">DataFrame.renamec</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.renamec (d, *args, **kwargs)</code></pre>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dummydf()</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df.renamec({<span class="st">'col_1'</span>: <span class="st">'col_a'</span>}, <span class="st">'col_2'</span>, <span class="st">'bar'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>col_a</th>
+      <th>bar</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>a</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>b</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>c</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>d</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>104</td>
+      <td>e</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="series.notin" class="level3">
+<h3 class="anchored" data-anchor-id="series.notin">Series.notin</h3>
+<blockquote class="blockquote">
+<pre><code> Series.notin (values)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="series.mapk" class="level3">
+<h3 class="anchored" data-anchor-id="series.mapk">Series.mapk</h3>
+<blockquote class="blockquote">
+<pre><code> Series.mapk (fun, **kwargs)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="dataframe.sort" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.sort">DataFrame.sort</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.sort (by, **kwargs)</code></pre>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>temp <span class="op">=</span> df.sample(df.<span class="bu">len</span>())</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>test_eq(temp.sort(<span class="st">'col_1'</span>), df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="move-columns-to-the-frontback" class="level2">
+<h2 class="anchored" data-anchor-id="move-columns-to-the-frontback">Move columns to the front/back</h2>
+<hr>
+<section id="dataframe.c2back" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.c2back">DataFrame.c2back</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.c2back (cols2back)</code></pre>
+</blockquote>
+<hr>
+</section>
+<section id="dataframe.c2front" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.c2front">DataFrame.c2front</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.c2front (cols2front)</code></pre>
+</blockquote>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>df <span class="op">=</span> dummydf()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>df.c2back([<span class="st">'col_1'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>col_2</th>
+      <th>col_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>104</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>df.c2back(<span class="st">'col_1'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>col_2</th>
+      <th>col_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>104</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>df.c2front(<span class="st">'col_2'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>col_2</th>
+      <th>col_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>104</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>df.c2front([<span class="st">'col_2'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>col_2</th>
+      <th>col_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>a</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>b</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>c</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>d</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>e</td>
+      <td>104</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+<hr>
+</section>
+<section id="dataframe.reorderc" class="level3">
+<h3 class="anchored" data-anchor-id="dataframe.reorderc">DataFrame.reorderc</h3>
+<blockquote class="blockquote">
+<pre><code> DataFrame.reorderc (to_front=[], to_back=[])</code></pre>
+</blockquote>
+<p>Reorder DataFrame columns.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>df[<span class="st">'col_3'</span>] <span class="op">=</span> df[<span class="st">'col_1'</span>]</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>df.reorderc([<span class="st">'col_3'</span>], [<span class="st">'col_1'</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display">
+
+<div>
+
+<table class="dataframe table table-sm table-striped">
+  <thead>
+    <tr>
+      <th></th>
+      <th>col_3</th>
+      <th>col_2</th>
+      <th>col_1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100</td>
+      <td>a</td>
+      <td>100</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>101</td>
+      <td>b</td>
+      <td>101</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>102</td>
+      <td>c</td>
+      <td>102</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>103</td>
+      <td>d</td>
+      <td>103</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>104</td>
+      <td>e</td>
+      <td>104</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
