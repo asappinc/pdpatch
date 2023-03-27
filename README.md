@@ -46,24 +46,24 @@ sns.scatterplot(data=df, x='time__s__', y='position__m__');
 
 ``` python
 fig = px.scatter(df,x='time__s__', y='time__s__') | px.scatter(df,x='time__s__', y=['position__m__', 'speed__m/s__'])
-fig
+fig.show('png')
 ```
 
-    Unable to display output for mime type(s): application/vnd.plotly.v1+json
+![](index_files/figure-gfm/cell-5-output-1.png)
 
 ``` python
 fig = px.scatter(df,x='time__s__', y='time__s__') / px.scatter(df,x='time__s__', y=['position__m__', 'speed__m/s__'])
-fig
+fig.show('png')
 ```
 
-    Unable to display output for mime type(s): application/vnd.plotly.v1+json
+![](index_files/figure-gfm/cell-6-output-1.png)
 
 ``` python
 fig = px.scatter(df,x='time__s__', y='time__s__') | px.scatter(df,x='time__s__', y=['position__m__', 'speed__m/s__'])
-fig / fig
+(fig / fig).show('png')
 ```
 
-    Unable to display output for mime type(s): application/vnd.plotly.v1+json
+![](index_files/figure-gfm/cell-7-output-1.png)
 
 ### Shorter methods
 
