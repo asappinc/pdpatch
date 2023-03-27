@@ -28,7 +28,8 @@ from pdpatch.all import *
 ``` python
 import pandas as pd
 from pdpatch.express import *
-df = pd.DataFrame({'time__s__': range(10), 'position__m__': range(10)})
+df = pd.DataFrame({'time__s__': range(10), 'position__m__': [i**1.3 for i in range(10)], 'speed__m/s__': 10*[1]})
+#df = pd.DataFrame({'time__s__': range(10), 'position__m__': range(10)})
 px.scatter(df, x='time__s__', y='position__m__').show('png')
 ```
 
@@ -40,6 +41,29 @@ sns.scatterplot(data=df, x='time__s__', y='position__m__');
 ```
 
 ![](index_files/figure-gfm/cell-4-output-1.png)
+
+### Add Altair-like Operation to plotly Figures
+
+``` python
+fig = px.scatter(df,x='time__s__', y='time__s__') | px.scatter(df,x='time__s__', y=['position__m__', 'speed__m/s__'])
+fig
+```
+
+    Unable to display output for mime type(s): application/vnd.plotly.v1+json
+
+``` python
+fig = px.scatter(df,x='time__s__', y='time__s__') / px.scatter(df,x='time__s__', y=['position__m__', 'speed__m/s__'])
+fig
+```
+
+    Unable to display output for mime type(s): application/vnd.plotly.v1+json
+
+``` python
+fig = px.scatter(df,x='time__s__', y='time__s__') | px.scatter(df,x='time__s__', y=['position__m__', 'speed__m/s__'])
+fig / fig
+```
+
+    Unable to display output for mime type(s): application/vnd.plotly.v1+json
 
 ### Shorter methods
 
