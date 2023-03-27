@@ -11,9 +11,10 @@ import pandas as pd
 from plotly import express
 from plotly.graph_objects import Figure
 import plotly.io as pio
+from plotly.subplots import make_subplots
 import seaborn as sns
-
 from fastcore.all import *
+
 from .core import *
 from .case import *
 
@@ -87,3 +88,59 @@ def __add__(self:Figure, other):
         trace.update(marker_color=color_discrete_sequence[n_traces+i])
         self.add_trace(trace)
     return self
+
+# %% ../03_express.ipynb 37
+@patch
+def __or__(self:Figure, other):
+    nr1 = len(self._grid_ref) if not self._grid_ref is None else 1
+    nc1 = len(self._grid_ref[0]) if not self._grid_ref is None else 1
+    nr2 = len(other._grid_ref) if not other._grid_ref is None else 1
+    nc2 = len(other._grid_ref[0]) if not other._grid_ref is None else 1
+    n_cols = nc1+nc2
+    assert nr2 == nr1
+    n_rows = nr1
+    fig = make_subplots(rows=n_rows, cols=n_cols)
+    for trace in self.data:
+        index = trace.xaxis.replace('x', '')
+        if index=='': index='1'
+        index = int(index)-1
+        row = index // nc1 + 1
+        col = index % nc1 + 1
+        fig.add_trace(trace, row=row, col=col)
+    for trace in other.data:
+        index = trace.xaxis.replace('x', '')
+        if index=='': index='1'
+        index = int(index)-1
+        row = index // nc2 + 1
+        col = nc1 + index % nc2 + 1
+        #print('col = nc1 + index % n_cols + 1')
+        #print(f' col={col} nc1={nc1}, index={index}, n_cols={n_cols}')
+        fig.add_trace(trace, row=row, col=col)
+    return fig
+
+# %% ../03_express.ipynb 39
+@patch
+def __truediv__(self:Figure, other):
+    nr1 = len(self._grid_ref) if not self._grid_ref is None else 1
+    nc1 = len(self._grid_ref[0]) if not self._grid_ref is None else 1
+    nr2 = len(other._grid_ref) if not other._grid_ref is None else 1
+    nc2 = len(other._grid_ref[0]) if not other._grid_ref is None else 1
+    n_rows = nr1 + nr2
+    assert nc2 == nc1
+    n_cols = nc1
+    fig = make_subplots(rows=n_rows, cols=n_cols)
+    for trace in self.data:
+        index = trace.xaxis.replace('x', '')
+        if index=='': index='1'
+        index = int(index)-1
+        row = index // nc1 + 1
+        col = index % nc1 + 1
+        fig.add_trace(trace, row=row, col=col)
+    for trace in other.data:
+        index = trace.xaxis.replace('x', '')
+        if index=='': index='1'
+        index = int(index)-1
+        row = nr1 + index // nc2 + 1
+        col = index % nc2 + 1
+        fig.add_trace(trace, row=row, col=col)
+    return fig
